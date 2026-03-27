@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 app = FastAPI()
 
@@ -12,6 +12,9 @@ def read_hello():
     return {"msg": "Hello, World!"}
 
 
-@app.get("/items/{id}")
-def read_item(item_id: int, q: str = None):
-    return {"id": id, "q": q}
+
+
+@app.get("/api/ip")
+async def read_root(request: Request):
+    client_ip = request.client.host
+    return {"client_ip": client_ip}
