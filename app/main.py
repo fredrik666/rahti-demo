@@ -30,14 +30,14 @@ async def read_root(request: Request):
     return {"client_ip": client_ip}
 
 rooms = [
-    {"room_number": 101, "type": "single", "price": 100},
-    {"room_number": 202, "type": "double", "price": 150},
-    {"room_number": 303, "type": "suite", "price": 200}
+    {"room_id": 1, "room_number": "101", "type": "single", "price": 800, "occupied": False},
+    {"room_id": 2, "room_number": "102", "type": "single", "price": 800, "occupied": True},
+    {"room_id": 3, "room_number": "201", "type": "double", "price": 1200, "occupied": False},
+    {"room_id": 4, "room_number": "202", "type": "double", "price": 1200, "occupied": False},
+    {"room_id": 5, "room_number": "301", "type": "suite", "price": 3000, "occupied": False},
+    {"room_id": 6, "room_number": "302", "type": "suite", "price": 3000, "occupied": True}
 ]
-@app.get("/")
-def read_root():
-    return {"msg": "Welcome to the Hotel API!"}
 
-@app.get("/rooms")
-def get_rooms():
+@app.get("/api/rooms")
+def read_rooms():
     return {"rooms": rooms}
