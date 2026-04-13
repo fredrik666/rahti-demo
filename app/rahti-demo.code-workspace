@@ -1,10 +1,14 @@
 {
-    "folders": [
-        {
-            "path": ".."
-        },
-        {
-            "path": "../../rinnefre-wdb-frontend"
-        }
-    ]
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../rinnefre-wdb-frontend"
+		},
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "rinnefre-wdb-frontend",
+		"liveServer.settings.port": 5501
+	}
 }
