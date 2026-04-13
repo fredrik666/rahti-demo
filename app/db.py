@@ -3,8 +3,6 @@ import psycopg
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    raise Exception("DATABASE_URL is not set in environment variables")
 
 def get_conn():
     return psycopg.connect(DATABASE_URL, autocommit=True, row_factory=psycopg.rows.dict_row)
