@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../rinnefre-wdb-frontend"
+		},
+		{
+			"path": "\\\\domus.sad.arcada.fi\\rinnefre\\html\\rinnefre-wdb-frontend"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "rinnefre-wdb-frontend",
+		"liveServer.settings.port": 5501
+	}
+}
