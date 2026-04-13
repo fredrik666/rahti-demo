@@ -16,7 +16,12 @@ app.add_middleware(
 
 
 #testing schema creation
-create_schema()
+@app.on_event("startup")
+def startup():
+    try:
+        create_schema()
+    except Exception as e:
+        print("DB init failed:", e)
 
 @app.get("/")
 def read_root():

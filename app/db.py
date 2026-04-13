@@ -19,5 +19,5 @@ def create_schema():
                 );
                     
                 -- lägg till nya kolumner
-                ALTER TABLE foo ADD COLUMN IF NOT EXISTS name VARCHAR(255);
+                ALTER TABLE rooms ADD COLUMN IF NOT EXISTS name VARCHAR(255);
             """)
