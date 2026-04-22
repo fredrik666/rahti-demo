@@ -36,7 +36,19 @@ def read_root():
 def read_hello():
     return {"msg": "Hello, World!"}
 
+@app.get("/if/{term}")
+def if_test(term: str):
+        ret_str = "Default response"
+        if (term == "hello" 
+            or term == "hi" 
+            or term == "Greetings"):
 
+            ret_str = "hello to you too!"
+        elif term == "hej" and 1 == 0:
+            ret_str = "hej på dig"
+        else:
+            ret_str = f"what do u mean with {term}?"
+        return {"msg": ret_str}
 
 
 @app.get("/api/ip")
@@ -44,18 +56,31 @@ async def read_root(request: Request):
     client_ip = request.client.host
     return {"client_ip": client_ip}
 
-rooms = [
-    {"room_id": 1, "room_number": "101", "type": "single", "price": 800, "occupied": False},
-    {"room_id": 2, "room_number": "102", "type": "single", "price": 800, "occupied": True},
-    {"room_id": 3, "room_number": "201", "type": "double", "price": 1200, "occupied": False},
-    {"room_id": 4, "room_number": "202", "type": "double", "price": 1200, "occupied": False},
-    {"room_id": 5, "room_number": "301", "type": "suite", "price": 3000, "occupied": False},
-    {"room_id": 6, "room_number": "302", "type": "suite", "price": 3000, "occupied": True}
-]
 
 @app.get("/api/rooms")
 def read_rooms():
-    return {"rooms": rooms}
+    with get_conn() as conn, conn.cursor() as cur:
+        cur.execute("""
+            SELECT *
+            FROM rooms
+            ORDER BY room_number
+        """)
+        rooms = cur.fetchall()
+    return rooms
+
+@app.get("/api/rooms/{room_id}")
+def get_room(room_id: int):
+    with get_conn() as conn, conn.cursor() as cur:
+        cur.execute("""
+            SELECT *
+            FROM rooms
+            WHERE room_id = %s
+        """, (room_id,))
+        room = cur.fetchone()
+    if room:
+        return room
+    else:
+        return {"msg": "Room not found"}, 404
 
 @app.post("/bookings")
 def create_booking():
